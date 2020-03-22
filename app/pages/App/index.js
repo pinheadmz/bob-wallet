@@ -40,6 +40,7 @@ class App extends Component {
     startNode: PropTypes.func.isRequired,
     watchActivity: PropTypes.func.isRequired,
     isChangingNetworks: PropTypes.bool.isRequired,
+    darkMode: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -65,7 +66,7 @@ class App extends Component {
     }
 
     return (
-      <div className="app">
+      <div className={`app ${this.props.darkMode ? 'dark' : ''}`}>
         <IdleModal />
         {this.renderContent()}
       </div>
@@ -224,7 +225,8 @@ export default withRouter(
       error: state.node.error,
       isLocked: state.wallet.isLocked,
       isChangingNetworks: state.node.isChangingNetworks,
-      initialized: state.wallet.initialized
+      initialized: state.wallet.initialized,
+      darkMode: state.settings.darkMode,
     }),
     dispatch => ({
       fetchWallet: () => dispatch(walletActions.fetchWallet()),
