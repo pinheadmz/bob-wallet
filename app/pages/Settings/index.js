@@ -8,8 +8,10 @@ import RevealSeedModal from './RevealSeedModal';
 import InterstitialWarningModal from './InterstitialWarningModal';
 import * as logger from '../../utils/logClient';
 import * as walletActions from '../../ducks/walletActions';
+import * as settingsActions from '../../ducks/settings';
 import NetworkPicker from '../NetworkPicker';
 import { clientStub as aClientStub } from '../../background/analytics/client';
+import Checkbox from '../../components/Checkbox';
 
 const analytics = aClientStub(() => require('electron').ipcRenderer);
 
@@ -18,10 +20,12 @@ const analytics = aClientStub(() => require('electron').ipcRenderer);
   (state) => ({
     network: state.node.network,
     apiKey: state.node.apiKey,
+    darkMode: state.settings.darkMode,
   }),
   dispatch => ({
     lockWallet: () => dispatch(walletActions.lockWallet()),
     removeWallet: () => dispatch(walletActions.removeWallet()),
+    toggleDarkMode: () => dispatch(settingsActions.toggleDarkMode()),
   }),
 )
 export default class Settings extends Component {
@@ -77,6 +81,15 @@ export default class Settings extends Component {
         <ul className="settings__links">
           <li>
             <Link to="/settings/new-wallet">Create a new wallet</Link>
+          </li>
+        </ul>
+        <div className="settings__section-head">Dark Mode</div>
+        <ul className="settings__links">
+          <li>
+              <Checkbox
+                onChange={() => this.props.toggleDarkMode()}
+                checked={this.props.darkMode}
+              />
           </li>
         </ul>
         <div className="settings__section-head">HSD API Key</div>
