@@ -6,6 +6,7 @@
   height: 100vh;
   width: 100vw;
   position: relative;
+  border-color: inherit;
 
   &__header {
     @extend %row-nowrap;
@@ -50,12 +51,14 @@
     flex: 1 1 auto;
     height: 100vh;
     overflow: auto;
+    border-color: inherit;
   }
 
   &__content {
     padding: 2rem 3rem;
     margin: 0;
     box-sizing: border-box;
+    border-color: inherit;
   }
 
   &__login {

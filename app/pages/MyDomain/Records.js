@@ -27,15 +27,16 @@ class Records extends Component {
     pendingData: PropTypes.object,
     showSuccess: PropTypes.func.isRequired,
     sendUpdate: PropTypes.func.isRequired,
+    darkMode: PropTypes.bool.isRequired,
   };
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     return !deepEqual(this.props, nextProps) || !deepEqual(this.state, nextState);
   }
 
-  static renderHeaders() {
+  renderHeaders() {
     return (
-      <HeaderRow>
+      <HeaderRow darkmode={this.props.darkMode}>
         <HeaderItem>
           <div>Type</div>
         </HeaderItem>
@@ -135,18 +136,19 @@ class Records extends Component {
           record={record}
           onEdit={this.makeOnEdit(i)}
           onRemove={() => this.onRemove(i)}
+          darkmode={this.props.darkMode}
         />
       );
     });
   }
 
   renderCreateRecord() {
-    return <CreateRecord name={this.props.name} onCreate={this.onCreate} />;
+    return <CreateRecord name={this.props.name} onCreate={this.onCreate} darkmode={this.props.darkMode}/>;
   }
 
   renderActionRow() {
     return (
-      <TableRow className="records-table__action-row">
+      <TableRow className={`records-table__action-row ${this.props.darkMode ? 'dark-secondary' : ''}`}>
         <div className="records-table__action-row__error-message">
           {this.state.errorMessage}
         </div>
@@ -184,7 +186,7 @@ class Records extends Component {
             'records-table--pending': this.props.pendingData,
           })}
         >
-          {Records.renderHeaders()}
+          {this.renderHeaders()}
           {this.renderRows()}
           {!this.props.pendingData ? this.renderCreateRecord() : null}
           {!this.props.pendingData ? this.renderActionRow() : null}
@@ -204,6 +206,7 @@ export default withRouter(
       return {
         resource,
         pendingData: getPendingData(domain),
+        darkMode: state.settings.darkMode,
       };
     },
     dispatch => ({

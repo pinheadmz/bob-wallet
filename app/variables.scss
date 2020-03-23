@@ -20,9 +20,22 @@ $orange-red: #ff2f1f;
 $electric-violet: #7524ff;
 $school-bus-yellow: #ffe000;
 
+%darkmode {
+  background-color: #1f1d21;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+%darkmode-secondary {
+  background-color: #312d35;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
 %col-nowrap {
   display: flex;
   flex-flow: column nowrap;
+  border-color: inherit;
 }
 
 %row-nowrap {

@@ -11,10 +11,12 @@ const analytics = aClientStub(() => require('electron').ipcRenderer);
 
 @connect(state => ({
   address: state.wallet.address,
+  darkMode: state.settings.darkMode,
 }))
 export default class ReceiveModal extends Component {
   static propTypes = {
     address: PropTypes.string.isRequired,
+    darkMode: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -75,8 +77,8 @@ export default class ReceiveModal extends Component {
   }
 
   render() {
-    const {onClose} = this.props;
+    const {onClose, darkMode} = this.props;
 
-    return <div className="receive__container">{this.renderContent()}</div>;
+    return <div className={`receive__container ${darkMode ? 'dark-secondary' : ''}`}>{this.renderContent()}</div>;
   }
 }

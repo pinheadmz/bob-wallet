@@ -3,6 +3,8 @@ import { shell } from 'electron';
 import ProofModal from '../../components/ProofModal/index';
 import './get-coins.scss';
 import { clientStub as aClientStub } from '../../background/analytics/client';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const analytics = aClientStub(() => require('electron').ipcRenderer);
 
@@ -17,7 +19,18 @@ const Step = ({number, title, paragraph}) => (
   </div>
 );
 
+
+@connect(
+  state => ({
+    darkMode: state.settings.darkMode,
+  }),
+  dispatch => ({})
+)
 export default class GetCoins extends Component {
+  static propTypes = {
+    darkMode: PropTypes.bool.isRequired,
+  };
+
   state = {
     isShowingGitHubModal: false,
     isShowingPGPModal: false,
@@ -127,7 +140,7 @@ export default class GetCoins extends Component {
           </div>
         </div>
         <div className="get-coins__right">
-          <div className="get-coins__panel">
+          <div className={`get-coins__panel ${this.props.darkMode ? 'dark-secondary' : ''}`}>
             <div className="get-coins__panel__title">Reserved for Top Developers</div>
             <div className="get-coins__panel__offer">
               <div>GitHub Developers</div>

@@ -10,6 +10,7 @@ class EditableRecord extends Component {
     record: PropTypes.object.isRequired,
     onEdit: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
+    darkmode: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -134,7 +135,7 @@ class EditableRecord extends Component {
 
   renderRow() {
     return (
-      <TableRow>
+      <TableRow className={this.props.darkmode ? 'dark' : ''}>
         <TableItem>{DROPDOWN_TYPES[this.state.currentTypeIndex].label}</TableItem>
         <TableItem>{this.state.value}</TableItem>
         <TableItem>

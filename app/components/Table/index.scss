@@ -3,13 +3,16 @@
 .table {
   @extend %col-nowrap;
   width: 100%;
+  border-color: rgba($black, 0.1);;
 
   &__header {
     @extend %row-nowrap;
     height: 1.8rem;
     align-items: center;
     background-color: $athens-gray;
-    border: 1px solid darken($athens-gray, 5);
+    border-width: 1px;
+    border-style: solid;
+    border-color: inherit;
     box-sizing: border-box;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -35,7 +38,9 @@
     @extend %row-nowrap;
     height: 2.8rem;
     align-items: center;
-    border: 1px solid darken($athens-gray, 5);
+    border-width: 1px;
+    border-style: solid;
+    border-color: inherit;
     border-top: none;
     box-sizing: border-box;
 

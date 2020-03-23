@@ -294,7 +294,9 @@
   &__action-row {
     @extend %row-nowrap;
     background-color: $athens-gray;
-    border: 1px solid darken($athens-gray, 5);
+    border-width: 1px;
+    border-style: solid;
+    border-color: inherit;
     align-items: center;
     justify-content: flex-end;
 

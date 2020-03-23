@@ -12,6 +12,7 @@ class DomainManager extends Component {
   static propTypes = {
     getMyNames: PropTypes.func.isRequired,
     myDomains: PropTypes.array.isRequired,
+    darkMode: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -27,7 +28,7 @@ class DomainManager extends Component {
       <div className="domain-manager">
         {this.props.myDomains.map(({name, nameHash}) => (
           <div
-            className="domain-manager__domain"
+            className={`domain-manager__domain ${this.props.darkMode ? 'dark-secondary' : ''}`}
             key={nameHash}
             onClick={() => this.props.history.push(`/domain_manager/${name}`)}
           >
@@ -65,6 +66,7 @@ export default withRouter(
   connect(
     state => ({
       myDomains: state.myDomains.names,
+      darkMode: state.settings.darkMode,
     }),
     dispatch => ({
       getMyNames: () => dispatch(myDomainsActions.getMyNames()),

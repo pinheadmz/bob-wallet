@@ -69,13 +69,12 @@
 
   &__title {
     @extend %h4;
-    color: $black;
     font-weight: 500;
     margin-bottom: 0.1rem;
     cursor: pointer;
 
     &--pending {
-      color: rgba($black, 0.5);
+
     }
   }
 
@@ -86,14 +85,10 @@
 
   &__subtitle {
     @extend %h5;
-
-    color: rgba($black, 0.5);
   }
 
   &__number {
     @extend %h4;
-
-    color: $black;
     font-weight: 500;
     margin-bottom: 0.1rem;
 
@@ -106,11 +101,7 @@
     }
 
     &--pending {
-      color: rgba($black, 0.5);
 
-      em {
-        color: $manatee-gray;
-      }
     }
   }
 }

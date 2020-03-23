@@ -10,7 +10,8 @@ import { Logo } from '../Logo';
 @connect(
   state => ({
     height: state.node.chain.height,
-    tip: state.node.chain.tip
+    tip: state.node.chain.tip,
+    darkMode: state.settings.darkMode,
   }),
   dispatch => ({})
 )
@@ -23,12 +24,13 @@ class Sidebar extends Component {
       pathname: PropTypes.string.isRequired
     }).isRequired,
     height: PropTypes.number.isRequired,
-    tip: PropTypes.string.isRequired
+    tip: PropTypes.string.isRequired,
+    darkMode: PropTypes.bool.isRequired,
   };
 
   render() {
     return (
-      <div className="sidebar">
+      <div className={`sidebar ${this.props.darkMode ? 'dark-secondary' : ''}`}>
         <div className="sidebar__content">
           <div>
             <div className="sidebar__logo-wrapper">

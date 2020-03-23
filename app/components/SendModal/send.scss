@@ -4,7 +4,9 @@
 
   &__container {
     max-width: 30rem;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-width: 1px;
+    border-style: solid;
+    border-color: inherit;
     border-radius: 0.6rem;
     padding: 2rem;
     margin: 0 auto;
@@ -42,7 +44,6 @@
   }
 
   &__label {
-    color: rgba($black, 0.4);
     font-weight: 600;
     font-size: 0.8rem;
     margin-bottom: 0.75rem;
@@ -102,6 +103,7 @@
     }
 
     &__unit {
+      color: $black;
       font-size: 0.9rem;
       font-weight: 500;
     }
@@ -132,6 +134,7 @@
       @extend %col-nowrap;
       @extend %box-input;
 
+      color: $black;
       position: relative;
       flex: 1 0 auto;
       padding: 0 0.75rem;
@@ -186,7 +189,6 @@
   }
 
   &__input-disclaimer {
-    color: rgba($black, 0.4);
     font-size: 0.8rem;
     padding-top: 0.8rem;
     font-style: italic;
@@ -234,7 +236,6 @@
     }
 
     &__label {
-      color: rgba($black, 0.4);
       font-size: 0.8rem;
       font-weight: 600;
     }

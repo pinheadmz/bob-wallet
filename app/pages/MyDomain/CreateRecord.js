@@ -84,7 +84,7 @@ class CreateRecord extends Component {
 
   renderCreationRow() {
     return (
-      <TableRow className="records-table__create-record">
+      <TableRow className={`records-table__create-record ${this.props.darkmode ? 'dark' : ''}`}>
         <div className="records-table__create-record__error-message">
           {this.state.errorMessage}
         </div>
@@ -111,7 +111,7 @@ class CreateRecord extends Component {
 
   renderCreateButton() {
     return (
-      <TableRow className="records-table__create-record">
+      <TableRow className={`records-table__create-record ${this.props.darkmode ? 'dark' : ''}`}>
         <button
           className="records-table__create-record__create-btn"
           onClick={() => this.setState({isCreating: true})}

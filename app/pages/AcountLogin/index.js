@@ -8,14 +8,17 @@ import Submittable from '../../components/Submittable';
 import { Link } from 'react-router-dom';
 
 @connect(
-  () => ({}),
+  state => ({
+    darkMode: state.settings.darkMode,
+  }),
   dispatch => ({
     unlockWallet: passphrase => dispatch(walletActions.unlockWallet(passphrase))
   })
 )
 export default class AccountLogin extends Component {
   static propTypes = {
-    unlockWallet: PropTypes.func.isRequired
+    unlockWallet: PropTypes.func.isRequired,
+    darkMode: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -39,7 +42,7 @@ export default class AccountLogin extends Component {
     const { passphrase, showError } = this.state;
 
     return (
-      <div className="login">
+      <div className={`login ${this.props.darkMode ? 'dark-secondary' : ''}`}>
         <div className="login_header_text">Log in to your wallet</div>
         <Submittable onSubmit={() => this.handleLogin(passphrase)}>
           <div>

@@ -35,6 +35,7 @@ const GAS_TO_ESTIMATES = {
     fees: state.node.fees,
     totalBalance: displayUnlockedConfirmBalance(state.wallet.balance),
     network: state.node.network,
+    darkMode: state.settings.darkMode,
   }),
   dispatch => ({
     send: (to, amount, fee) => dispatch(walletActions.send(to, amount, fee)),
@@ -46,6 +47,7 @@ class SendModal extends Component {
     address: PropTypes.string.isRequired,
     totalBalance: PropTypes.string.isRequired,
     network: PropTypes.string.isRequired,
+    darkMode: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -159,10 +161,11 @@ class SendModal extends Component {
 
   renderSend() {
     const {selectedGasOption, amount, to} = this.state;
+    const {darkMode} = this.props;
     const {isValid} = this.validate();
 
     return (
-      <div className="send__container">
+      <div className={`send__container ${darkMode ? 'dark-secondary' : ''}`}>
         <div className="send__content">
           <div className="send__header">
             <div className="send__title">Send Funds</div>
@@ -286,8 +289,10 @@ class SendModal extends Component {
       txSize,
     } = this.state;
 
+    const {darkMode} = this.props;
+
     return (
-      <div className="send__container">
+      <div className={`send__container ${darkMode ? 'dark-secondary' : ''}`}>
         <div className="send__content">
           <div className="send__header">
             <div className="send__title">Confirm Transaction</div>
@@ -365,8 +370,9 @@ class SendModal extends Component {
 
   renderTransactionSent() {
     const {amount} = this.state;
+    const {darkMode} = this.props;
     return (
-      <div className="send__container">
+      <div className={`send__container ${darkMode ? 'dark-secondary' : ''}`}>
         <div className="send__sent__wrapper">
           <div className="send__sent__confirm-icon" />
           <div className="send__sent__headline">Transaction Sent</div>

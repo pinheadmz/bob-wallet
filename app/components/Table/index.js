@@ -14,7 +14,7 @@ export class Table extends Component {
 export class HeaderRow extends Component {
   render() {
     return (
-      <div className="table__header">
+      <div className={`table__header ${this.props.darkmode ? 'dark-secondary' : ''}`}>
         {this.props.children}
       </div>
     )

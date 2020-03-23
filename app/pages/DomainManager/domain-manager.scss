@@ -18,6 +18,11 @@
       cursor: pointer;
     }
 
+    &.dark-secondary:hover {
+      background-color: $mischka-gray;
+      color: $black;
+    }
+
     &:active {
       background-color: darken($athens-gray, 2);
       cursor: pointer;
