@@ -212,7 +212,8 @@ export class NodeService extends EventEmitter {
   }
 
   async finalizeWithPayment(name, fundingAddr, nameReceiveAddr, price) {
-    this._ensureStarted();
+    await this._ensureStarted();
+
     const ret = new Promise((resolve, reject) => {
       this.hsdWindow.webContents.once('ipc-message', (_, channel, reply) => {
         if (channel !== 'finalize-with-payment-reply') {
@@ -229,7 +230,8 @@ export class NodeService extends EventEmitter {
   }
 
   async claimPaidTransfer(txHex) {
-    this._ensureStarted();
+    await this._ensureStarted();
+
     const ret = new Promise((resolve, reject) => {
       this.hsdWindow.webContents.once('ipc-message', (_, channel, reply) => {
         if (channel !== 'claim-paid-transfer-reply') {
@@ -245,14 +247,23 @@ export class NodeService extends EventEmitter {
     return ret;
   }
 
-  _ensureStarted() {
-    if (!this.hsdWindow) {
-      throw new Error('hsd not started.');
-    }
+
+  async _ensureStarted() {
+    return new Promise((resolve, reject) => {
+      if (this.client) {
+        resolve();
+        return;
+      }
+
+      setTimeout(async () => {
+        await this._ensureStarted();
+        resolve();
+      }, 500);
+    });
   }
 
-  _execRPC(method, args) {
-    this._ensureStarted();
+  async _execRPC(method, args) {
+    await this._ensureStarted();
     return this.client.execute(method, args);
   }
 }
