@@ -10,6 +10,7 @@
   flex: 1 1 auto;
   height: 100%;
   overflow-x: hidden;
+  box-shadow: inset 0px 0px 6px 2px #8a008a;
 
   &--empty {
     .sidebar__logo {

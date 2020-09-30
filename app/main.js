@@ -37,7 +37,7 @@ app.on('ready', async () => {
       type: 'error',
       buttons: ['OK'],
       title: 'Couldn\'t Start',
-      message: 'An error occurred that prevented Bob from starting. Please quit and try again.',
+      message: 'An error occurred that prevented Roberto! from starting. Please quit and try again.',
       detail: `Error: ${e.message}\nStack: ${e.stack}`,
     }, () => app.quit());
     Sentry.captureException(e);

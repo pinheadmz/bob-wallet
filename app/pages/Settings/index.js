@@ -111,7 +111,7 @@ export default class Settings extends Component {
           <Route path="/settings/zap-txs" component={ZapTXsModal} />
         </Switch>
         <div className="settings__footer">
-          Bob v{pkg.version}
+          {pkg.productName} v{pkg.version}
         </div>
       </ContentArea>
     );
