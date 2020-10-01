@@ -22,6 +22,9 @@ if (
   require('electron-debug')();
 }
 
+if (process.env.ROBERTO_PREFIX != null)
+  app.setPath('userData', process.env.ROBERTO_PREFIX);
+
 app.on('ready', async () => {
   // start the IPC server
   const dbService = require('./background/db/service');
