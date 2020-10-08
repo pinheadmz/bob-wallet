@@ -284,8 +284,8 @@ class WalletService {
   _onNodeStart = async (networkName, network, apiKey) => {
     this.networkName = networkName;
     const walletOptions = {
-      network: network,
-      port: network.walletPort,
+      network: process.env.HSD_NETWORK ? process.env.HSD_NETWORK : network,
+      port: process.env.HSD_WALLET_HTTP_PORT ? parseInt(process.env.HSD_WALLET_HTTP_PORT) : network.walletPort,
       apiKey,
     };
 

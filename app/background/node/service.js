@@ -39,10 +39,6 @@ export class NodeService extends EventEmitter {
       throw new Error('Invalid network.');
     }
     const network = Network.get(networkName);
-    const portsFree = await checkHSDPortsFree(network);
-    if (!portsFree) {
-      throw new Error('hsd ports in use. Please make sure no other hsd instance is running, quit Bob, and try again.');
-    }
 
     console.log(`Starting node on ${networkName} network.`);
     const apiKey = crypto.randomBytes(20).toString('hex');
@@ -81,8 +77,8 @@ export class NodeService extends EventEmitter {
     });
 
     const client = new NodeClient({
-      network: network,
-      port: network.rpcPort,
+      network: process.env.HSD_NETWORK ? process.env.HSD_NETWORK : network,
+      port: process.env.HSD_HTTP_PORT ? parseInt(process.env.HSD_HTTP_PORT) : network.rpcPort,
       apiKey,
     });
     await retry(() => client.getInfo(), 20, 200);
