@@ -2,6 +2,8 @@
 
 A personal, experimental fork of [Bob Wallet](https://github.com/kyokan/bob-wallet)
 
+![Roberto!](https://raw.githubusercontent.com/pinheadmz/bob-wallet/roberto1/resources/roberto.png)
+
 ## Major differences:
 
 - Original wallet-as-plugin architecture
