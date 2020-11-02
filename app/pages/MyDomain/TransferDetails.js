@@ -136,6 +136,7 @@ class TransferDetails extends Component {
                   isShowingFinalizeWithPayment: false,
                 })}
                 name={this.props.name}
+                transferTo={info.transferTo}
               />
             )}
             {this.renderRevoke()}

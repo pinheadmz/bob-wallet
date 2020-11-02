@@ -1,9 +1,11 @@
+import { Amount } from 'hsd/lib/ui';
 import React, { Component } from 'react';
 import { MiniModal } from '../../components/Modal/MiniModal';
 import { MTX } from 'hsd/lib/primitives';
 import { connect } from 'react-redux';
 import { clientStub as nClientStub } from '../../background/node/client';
 import { showSuccess } from '../../ducks/notifications';
+import { waitForPassphrase } from '../../ducks/walletActions';
 
 const node = nClientStub(() => require('electron').ipcRenderer);
 
@@ -13,6 +15,7 @@ const node = nClientStub(() => require('electron').ipcRenderer);
   }),
   (dispatch) => ({
     showSuccess: (message) => dispatch(showSuccess(message)),
+    waitForPassphrase: () => dispatch(waitForPassphrase()),
   }),
 )
 export default class ClaimNameForPayment extends Component {
@@ -51,6 +54,7 @@ export default class ClaimNameForPayment extends Component {
 
   onClickTransfer = async () => {
     try {
+      await this.props.waitForPassphrase();
       await node.claimPaidTransfer(this.state.hex);
       this.props.onClose();
       this.props.showSuccess('Successfully claimed paid transfer. Please wait 1 block for the name to appear.');
@@ -139,7 +143,7 @@ export default class ClaimNameForPayment extends Component {
           <dt>Address Receiving Funds</dt>
           <dd>{this.state.fundingAddr}</dd>
           <dt>Price</dt>
-          <dd>{this.state.price} HNS</dd>
+          <dd>{Amount.fromValue(this.state.price).toCoins()} HNS</dd>
         </dl>
 
         <div className="claim-name-for-payment__verification-buttons">

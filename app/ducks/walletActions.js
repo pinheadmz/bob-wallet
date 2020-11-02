@@ -223,6 +223,13 @@ export const getPassphrase = (resolve, reject) => ({
   payload: {get: true, resolve, reject},
 });
 
+export const waitForPassphrase = () => async (dispatch) => {
+  await new Promise((resolve, reject) => {
+    dispatch(getPassphrase(resolve, reject));
+  });
+  return null;
+};
+
 export const closeGetPassphrase = () => ({
   type: GET_PASSPHRASE,
   payload: {get: false},
