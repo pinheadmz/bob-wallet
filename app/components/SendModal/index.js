@@ -379,7 +379,7 @@ class SendModal extends Component {
             )} HNS to an external Handshake address.`}
           </div>
           <div className="send__sent__details send__sent__details-first" onClick={this.viewOnHNScan}>
-            View on HNScan
+            View on Explorer
           </div>
           <div className="send__sent__details" onClick={() => this.resetState()}>Create New Transaction</div>
         </div>
@@ -402,7 +402,7 @@ class SendModal extends Component {
   }
 
   viewOnHNScan = () => {
-    shell.openExternal(`https://hnscan.com/tx/${this.state.transactionHash}`);
+    shell.openExternal(`https://hnsnetwork.com/txs/${this.state.transactionHash}`);
   };
 
   renderConfirmTime() {
