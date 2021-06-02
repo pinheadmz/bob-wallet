@@ -367,6 +367,16 @@ class WalletService {
     return value - amount;
   };
 
+  createClaim = (name) => this._ledgerProxy(
+    () => this._executeRPC('createclaim', [name]),
+    () => this._executeRPC('createclaim', [name]),
+  );
+
+  sendClaim = (name) => this._ledgerProxy(
+    () => this._executeRPC('sendclaim', [name]),
+    () => this._executeRPC('sendclaim', [name]),
+  );
+
   sendOpen = (name) => this._ledgerProxy(
     () => this._executeRPC('createopen', [name]),
     () => this._executeRPC('sendopen', [name], this.lock),
@@ -1000,6 +1010,8 @@ const methods = {
   importName: service.importName,
   rpcGetWalletInfo: service.rpcGetWalletInfo,
   listWallets: service.listWallets,
+  createClaim: service.createClaim,
+  sendClaim: service.sendClaim,
 };
 
 export async function start(server) {
