@@ -53,6 +53,7 @@ export default class AccountLogin extends Component {
 
   render() {
     const {passphrase, showError} = this.state;
+    const {walletsDetails} = this.props;
 
     if (!this.props.wallets.length) {
       return <Redirect to="/funding-options" />;
@@ -66,9 +67,11 @@ export default class AccountLogin extends Component {
         <div className="login_header_text">Log in to your wallet</div>
         <Submittable onSubmit={() => this.handleLogin(passphrase)}>
           <Dropdown
-            items={this.props.wallets.map(w => ({label: w}))}
+            items={this.props.wallets.map((w) => ({
+              label: w + ((walletsDetails[w] && walletsDetails[w].watchOnly) ? " (Ledger)" : ""),
+            }))}
             currentIndex={this.state.chosenWallet}
-            onChange={(i) => this.setState({chosenWallet: i})}
+            onChange={(i) => this.setState({ chosenWallet: i })}
           />
           <div>
             {!isLedgerWallet && (
