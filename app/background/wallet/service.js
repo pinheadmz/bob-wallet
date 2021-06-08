@@ -497,7 +497,7 @@ class WalletService {
   );
 
   lock = () => this._ledgerProxy(
-    () => null,
+    () => this.client.lock(this.name),
     () => this.client.lock(this.name),
     false
   );
@@ -505,7 +505,7 @@ class WalletService {
   unlock = (name, passphrase) => {
     this.setWallet(name);
     return this._ledgerProxy(
-      () => null,
+      () => this.client.unlock(this.name, passphrase),
       () => this.client.unlock(this.name, passphrase),
       false
     );
